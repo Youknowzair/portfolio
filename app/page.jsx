@@ -22,7 +22,7 @@ export default function OnePage() {
           <h1 className="text-3xl md:text-5xl font-semibold tracking-tight">I build clean, scalable software.</h1>
           <p className="text-text-secondary text-lg">Minimalist engineering • AI/ML aware • Systems thinking</p>
           <div className="flex items-center gap-4 md:gap-5">
-            <a href="#projects" className="px-5 py-3 rounded-xl2 btn-primary">View Projects</a>
+            <a href="/projects" className="px-5 py-3 rounded-xl2 btn-primary">View Projects</a>
             <a href="#resume" className="px-5 py-3 rounded-xl2 btn-ghost">Download CV</a>
             <a className="inline-flex items-center justify-center hover:opacity-90"
                href="https://www.linkedin.com/in/syed-uzair-a31308256/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">

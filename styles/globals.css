@@ -33,6 +33,11 @@ html, body {
   color: var(--text);
 }
 
+/* Typography: apply heading font if provided via CSS variable */
+:is(h1,h2,h3){
+  font-family: var(--font-heading, inherit);
+}
+
 .glass {
   background: rgba(255,255,255,0.6);
   backdrop-filter: blur(10px);
@@ -69,21 +74,23 @@ html, body {
 .btn-primary {
   background: var(--text);
   color: #fff;
-  transition: opacity .2s ease, transform .2s ease, box-shadow .15s ease;
+  transition: opacity .2s ease, transform .2s ease, box-shadow .15s ease, border-color .15s ease;
   box-shadow: 0 6px 18px rgba(15,23,42,0.08);
+  border: 1px solid var(--text);
 }
 .dark .btn-primary { /* slightly lighter primary in dark to avoid pure-black */
   background: linear-gradient(90deg,#111827,#0b1220);
   color: #fff;
+  border-color: rgba(255,255,255,0.08);
 }
 .btn-primary:hover { opacity: .95; transform: translateY(-1px); box-shadow: 0 10px 30px rgba(2,6,23,0.18); }
 .btn-ghost {
   border: 1px solid var(--divider);
   background: var(--surface);
-  transition: background .2s ease, transform .2s ease, color .15s ease;
+  transition: background .2s ease, transform .2s ease, color .15s ease, border-color .15s ease;
   color: var(--text);
 }
-.dark .btn-ghost { color: var(--text); }
+.dark .btn-ghost { color: var(--text); border-color: rgba(255,255,255,0.12); background: rgba(255,255,255,0.03); }
 .btn-ghost:hover { background: rgba(0,0,0,0.04); transform: translateY(-1px); }
 .card-hover {
   transition: transform .2s ease, box-shadow .3s ease, border-color .2s ease;
@@ -93,7 +100,7 @@ html, body {
   box-shadow: 0 12px 30px rgba(0,0,0,0.08);
   border-color: rgba(0,0,0,0.08);
 }
-.link-row { 
+.link-row {
   display:flex; align-items:center; justify-content:space-between; 
   padding: 10px 12px; border: 1px solid var(--divider); border-radius: 10px; 
   background: var(--surface);
