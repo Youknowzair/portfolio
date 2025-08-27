@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import GlassCard from "../components/GlassCard";
+import experiences from "../data/experiences";
+import education from "../data/education";
 
 export default function OnePage() {
   const [loaded, setLoaded] = useState(false);
@@ -105,45 +107,8 @@ export default function OnePage() {
 
       {/* EXPERIENCE */}
       <section id="experience" className="section">
-        <h2 className="text-2xl md:text-3xl font-semibold mb-4">Experience</h2>
-        <div className="relative before:absolute before:top-0 before:bottom-0 before:left-4 before:w-px before:bg-divider">
-          {[
-            { company: "Acme Systems", role: "Software Engineer Intern", period: "May 2024 – Aug 2024", impacts: ["Cut p95 latency by 43% via cache rewrite", "Shipped CI optimizations saving 28% build time", "Owned feature flags system (0 post-release incidents)"] },
-            { company: "Open Source", role: "Contributor", period: "2023 – present", impacts: ["Merged PRs to popular OSS repos", "Maintained docs & tests across 3 modules", "Raised and resolved perf issues with benchmarks"] }
-          ].map((it, i) => (
-            <div key={i} className="ml-8 mb-6 glass rounded-xl2 p-4">
-              <h3 className="text-lg font-semibold">{it.role} · {it.company}</h3>
-              <p className="text-text-secondary text-sm">{it.period}</p>
-              <ul className="mt-2 list-disc pl-5 text-sm">
-                {it.impacts.map(line => <li key={line}>{line}</li>)}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
 
-      {/* EDUCATION (single tile with link rows) */}
-      <section id="education" className="section">
-        <h2 className="text-2xl md:text-3xl font-semibold mb-4">Education</h2>
-        <div className="glass rounded-xl2 p-4 space-y-3">
-          {[
-            { school: "Your University", degree: "B.E. / B.Tech in CSE/IT", period: "2021 – 2025", link: "#" },
-            { school: "Target: Georgia Tech (MS CS)", degree: "Focus: ML + Computing Systems", period: "2026+", link: "#" }
-          ].map((ed) => (
-            <a key={ed.school} href={ed.link} className="link-row">
-              <div>
-                <p className="text-sm text-text-secondary">{ed.school}</p>
-                <p className="font-medium">{ed.degree}</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="text-xs text-text-muted">{ed.period}</span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                  <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/>
-                </svg>
-              </div>
-            </a>
-          ))}
-        </div>
+  <TabPanel experiences={experiences} education={education} />
       </section>
 
       {/* SKILLS */}
@@ -170,7 +135,6 @@ export default function OnePage() {
         <h2 className="text-2xl md:text-3xl font-semibold mb-4">Resume / CV</h2>
         <div className="flex flex-wrap items-center gap-3">
           <a className="px-5 py-3 rounded-xl2 btn-ghost" href="/resume.pdf" download>Download CV</a>
-          <span className="text-sm text-text-muted">PDF · Keep it to 1 page · Update quarterly</span>
         </div>
       </section>
 
@@ -193,6 +157,77 @@ export default function OnePage() {
           <button className="px-5 py-3 rounded-xl2 btn-primary">Send</button>
         </form>
       </section>
+    </div>
+  );
+}
+
+function TabPanel({ experiences, education }){
+  const [tab, setTab] = useState('work');
+
+  return (
+    <div>
+      <div className="max-w-2xl mx-auto border border-divider rounded-xl2 bg-surface">
+        <div className="p-3 sm:p-4 border-b border-divider">
+          <div className="flex w-full">
+            <div className="inline-flex w-full">
+              <button
+                onClick={() => setTab('work')}
+                className={`px-5 py-3 text-sm text-center rounded-none flex-1 ${tab==='work' ? 'btn-primary' : 'btn-ghost'}`}
+                aria-pressed={tab==='work'}
+              >
+                Work
+              </button>
+              <button
+                onClick={() => setTab('education')}
+                className={`-ml-px px-5 py-3 text-sm text-center rounded-none flex-1 ${tab==='education' ? 'btn-primary' : 'btn-ghost'}`}
+                aria-pressed={tab==='education'}
+              >
+                Education
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="p-3 sm:p-4">
+          {tab === 'work' ? (
+            <div className="space-y-3">
+              {experiences.map((it, i) => (
+                <div key={i} className="glass rounded-xl p-3 border border-divider shadow-sm">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      {it.logo && (
+                        <img src={it.logo} alt={`${it.company} logo`} className="w-9 h-9 rounded-md object-contain bg-white/5 p-1" />
+                      )}
+                      <div>
+                        <div className="text-sm font-semibold leading-tight">{it.company}</div>
+                        <div className="text-xs text-text-secondary">{it.role}</div>
+                      </div>
+                    </div>
+                    <div className="text-xs text-text-muted self-start bg-surface/60 px-2 py-0.5 rounded-full">{it.period}</div>
+                  </div>
+                  <ul className="mt-2 grid gap-1 list-disc list-inside text-xs text-text-secondary">
+                    {it.impacts.map(line => <li key={line}>{line}</li>)}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {education.map((ed, i) => (
+                <a key={i} href={ed.link} className="glass rounded-xl p-3 block border border-divider shadow-sm">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-sm font-semibold leading-tight">{ed.school}</div>
+                      <div className="text-xs text-text-secondary">{ed.degree}</div>
+                    </div>
+                    <div className="text-xs text-text-muted bg-surface/60 px-2 py-0.5 rounded-full">{ed.period}</div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
