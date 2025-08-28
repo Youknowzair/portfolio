@@ -11,7 +11,7 @@ export default function OnePage() {
   const [loaded, setLoaded] = useState(false);
   const [tLoading, setTLoading] = useState(false);
   const [tShown, setTShown] = useState(false);
-  useEffect(() => { const t = setTimeout(() => setLoaded(true), 1500); return () => clearTimeout(t); }, []);
+  useEffect(() => { const t = setTimeout(() => setLoaded(true), 3500); return () => clearTimeout(t); }, []); // 3.5 seconds to match loader
   if (!loaded) return <Loader />;
 
   return (
@@ -20,7 +20,7 @@ export default function OnePage() {
       <section id="home" className="section grid md:grid-cols-2 gap-8 items-center">
         <div className="space-y-5">
           <h1 className="text-3xl md:text-5xl font-semibold tracking-tight">I build clean, scalable software.</h1>
-          <p className="text-text-secondary text-lg">Minimalist engineering • AI/ML aware • Systems thinking</p>
+          <p className="text-text-secondary text-lg">Building AI-driven systems • ML engineering • Reliable, scalable software</p>
           <div className="flex items-center gap-4 md:gap-5">
             <a href="/projects" className="px-5 py-3 rounded-xl2 btn-primary">View Projects</a>
             <a href="#resume" className="px-5 py-3 rounded-xl2 btn-ghost">Download CV</a>
@@ -84,9 +84,10 @@ export default function OnePage() {
         <h2 className="text-2xl md:text-3xl font-semibold mb-4">About</h2>
         <div className="grid md:grid-cols-3 gap-4">
           <GlassCard className="md:col-span-2">
-            <p className="text-text-secondary">
-              Short, sharp narrative about your motivation, what you’re exploring in AI/ML and systems,
-              and how you approach engineering decisions (constraints → trade-offs → measurable impact).
+            <p className="text-text-secondary text-[15px] leading-7">
+              As an Information Technology undergraduate at TCET, I am deeply focused on advancing my expertise in Artificial Intelligence and Machine Learning. With a solid foundation in programming and data-driven problem-solving, I have developed and contributed to projects involving predictive modeling, intelligent systems, and algorithmic optimization.
+              <br /><br />
+              I am continuously enhancing my proficiency in Python, machine learning frameworks, and data analysis tools. My goal is to build intelligent, scalable solutions that drive innovation across industries, while actively pursuing opportunities to grow as a software engineer in AI-centric domains.
             </p>
           </GlassCard>
           <GlassCard>
@@ -321,39 +322,58 @@ function TabPanel({ experiences, education }){
 
         <div className="p-3 sm:p-4">
           {tab === 'work' ? (
-            <div className="space-y-3">
+            <div className="space-y-4">
               {experiences.map((it, i) => (
-                <div key={i} className="glass rounded-xl p-3 border border-divider shadow-sm">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-center gap-3">
+                <div key={i} className="glass rounded-xl p-4 border border-divider shadow-sm">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-center gap-5">
                       {it.logo && (
-                        <img src={it.logo} alt={`${it.company} logo`} className="w-9 h-9 rounded-md object-contain bg-white/5 p-1" />
+                        <img src={it.logo} alt={`${it.company} logo`} className="w-16 h-16 object-contain" />
                       )}
-                      <div>
-                        <div className="text-sm font-semibold leading-tight">{it.company}</div>
-                        <div className="text-xs text-text-secondary">{it.role}</div>
+                      <div className="font-inter">
+                        <div className="text-lg font-semibold leading-tight text-text tracking-tight">{it.company}</div>
+                        <div className="text-base text-text-secondary font-medium">{it.role}</div>
                       </div>
                     </div>
-                    <div className="text-xs text-text-muted self-start bg-surface/60 px-2 py-0.5 rounded-full">{it.period}</div>
+                    <div className="text-sm text-text-muted self-start bg-surface/60 px-3 py-1 rounded-full font-medium">{it.period}</div>
                   </div>
-                  <ul className="mt-2 grid gap-1 list-disc list-inside text-xs text-text-secondary">
+                  <ul className="mt-3 grid gap-1.5 list-disc list-inside text-[13px] text-text-secondary">
                     {it.impacts.map(line => <li key={line}>{line}</li>)}
                   </ul>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-4">
               {education.map((ed, i) => (
-                <a key={i} href={ed.link} className="glass rounded-xl p-3 block border border-divider shadow-sm">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="text-sm font-semibold leading-tight">{ed.school}</div>
-                      <div className="text-xs text-text-secondary">{ed.degree}</div>
+                <div key={i} className="glass rounded-xl p-4 border border-divider shadow-sm">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-center gap-4">
+                      {ed.logo && (
+                        <div className="w-16 h-16 rounded-full overflow-hidden shrink-0 aspect-square" style={{ WebkitMaskImage: 'radial-gradient(circle, #000 99%, transparent 100%)', maskImage: 'radial-gradient(circle, #000 99%, transparent 100%)' }}>
+                          <img src={ed.logo} alt={`${ed.school} logo`} className="w-full h-full object-cover object-center" />
+                        </div>
+                      )}
+                      <div className="font-inter flex-1">
+                        <div className="text-lg font-semibold leading-tight text-text tracking-tight">{ed.school}</div>
+                        {ed.honors && (
+                          <div className="text-sm text-text-secondary font-medium mt-0.5">{ed.honors}</div>
+                        )}
+                        <div className="text-base text-text-secondary font-medium mt-0.5">{ed.degree}</div>
+                      </div>
                     </div>
-                    <div className="text-xs text-text-muted bg-surface/60 px-2 py-0.5 rounded-full">{ed.period}</div>
+                    <div className="flex flex-col items-end gap-2 min-w-[140px]">
+                      <div className="text-sm text-text-muted bg-surface/60 px-3 py-1 rounded-full font-medium">{ed.period}</div>
+                      {ed.percentage && (
+                        <div className="text-sm text-text-muted">
+                          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full border border-divider bg-surface/60 font-medium">
+                            {ed.percentage}
+                          </span>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </a>
+                </div>
               ))}
             </div>
           )}
