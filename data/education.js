@@ -1,16 +1,27 @@
 // Education data
 const education = [
   {
-    school: "Your University",
-    degree: "B.E. / B.Tech in CSE/IT",
-    period: "2021 – 2025",
-    link: "#"
+    school: "Thakur College Of Engineering And Technology",
+    degree: "B.E Information Technology",
+    period: "2023-2026",
+    percentage: "GPA: 9.1",
+    honors: "Research in Honours Program",
+    logo: "/Tcet.png"
   },
   {
-    school: "Target: Georgia Tech (MS CS)",
-    degree: "Focus: ML + Computing Systems",
-    period: "2026+",
-    link: "#"
+    school: "Government Polytechnic Mumbai",
+    degree: "Diploma In Computer Engineering",
+    period: "2020-2023",
+    percentage: "84.33%",
+    logo: "/gpm.png",
+    logoFit: "cover"
+  },
+  {
+    school: "Manavya Vikas Vidyalaya Degloor",
+    degree: "SSC",
+    period: "2019-2020",
+    percentage: "85%",
+    logo: "/mvv.png"
   }
 ];
 
