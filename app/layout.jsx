@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 
-// Professional FAANG-level font - used by Google, Apple, Microsoft, Meta
+
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",

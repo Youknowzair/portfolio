@@ -1,5 +1,5 @@
 // Testimonials shown in the "What others say" section.
-// Note: LinkedIn doesn't provide a public API for recommendations; we mirror quotes here and link to LinkedIn.
+
 const testimonials = [
   {
     name: "Naufil Asar",
