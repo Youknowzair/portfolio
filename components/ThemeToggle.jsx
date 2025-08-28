@@ -1,17 +1,18 @@
 "use client";
 import { useEffect, useState } from "react";
-import clsx from "clsx";
+import { motion } from "framer-motion";
 
 export default function ThemeToggle() {
-  // null = not initialized yet (prevents flashes), boolean afterwards
   const [dark, setDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const saved = typeof window !== "undefined" ? localStorage.getItem("theme") : null;
-    const prefersDark = typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    setMounted(true);
+    const saved = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const useDark = saved ? saved === "dark" : prefersDark;
     setDark(useDark);
-    if (typeof document !== "undefined") document.documentElement.classList.toggle("dark", useDark);
+    document.documentElement.classList.toggle("dark", useDark);
   }, []);
 
   function toggle() {
@@ -21,61 +22,76 @@ export default function ThemeToggle() {
     localStorage.setItem("theme", next ? "dark" : "light");
   }
 
+  if (!mounted) {
+    return <div className="w-8 h-8 rounded-full bg-divider/20 animate-pulse" />;
+  }
+
   return (
-    <button
+    <motion.button
       type="button"
-      aria-pressed={dark}
       aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
       onClick={toggle}
-      className={clsx(
-        "relative inline-flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
-        "w-14 h-8 rounded-full transition-colors duration-300",
-        dark ? "bg-gradient-to-r from-indigo-600 to-pink-500" : "bg-gray-200 dark:bg-gray-700"
-      )}
+      className="relative w-10 h-10 rounded-lg bg-surface border border-divider/50 hover:border-divider transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-text/20 focus:ring-offset-2 focus:ring-offset-background group"
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
     >
-      {/* track inner glow */}
-      <span className={clsx("sr-only")}>{dark ? "Dark mode" : "Light mode"}</span>
-
-      {/* knob */}
-      <span
-        className={clsx(
-          "transform-gpu transition-transform duration-300 ease-in-out",
-          "inline-block w-6 h-6 rounded-full bg-white dark:bg-gray-900 shadow-md",
-          dark ? "translate-x-6" : "translate-x-1"
-        )}
+      {/* Light Mode - Clean Sun Icon */}
+      <motion.div
+        className="absolute inset-0 flex items-center justify-center"
+        animate={{
+          opacity: dark ? 0 : 1,
+          scale: dark ? 0.8 : 1,
+        }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
       >
-        {/* icons inside knob: sun & moon crossfade */}
         <svg
+          width="18"
+          height="18"
           viewBox="0 0 24 24"
-          className={clsx("w-4 h-4 m-1 transition-opacity duration-300", dark ? "opacity-0" : "opacity-100")}
-          xmlns="http://www.w3.org/2000/svg"
           fill="none"
           stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-text"
         >
-          <circle cx="12" cy="12" r="3" strokeWidth="2" />
-          <g strokeWidth="2">
-            <path d="M12 4v1" />
-            <path d="M12 19v1" />
-            <path d="M4 12H3" />
-            <path d="M21 12h-1" />
-            <path d="M5.6 5.6L4.5 4.5" />
-            <path d="M19.5 19.5l-1.1-1.1" />
-            <path d="M5.6 18.4l-1.1 1.1" />
-            <path d="M19.5 4.5l-1.1 1.1" />
-          </g>
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2" />
+          <path d="M12 20v2" />
+          <path d="M4.93 4.93l1.41 1.41" />
+          <path d="M17.66 17.66l1.41 1.41" />
+          <path d="M2 12h2" />
+          <path d="M20 12h2" />
+          <path d="M6.34 17.66l-1.41 1.41" />
+          <path d="M19.07 4.93l-1.41 1.41" />
         </svg>
+      </motion.div>
 
+      {/* Dark Mode - Clean Moon Icon */}
+      <motion.div
+        className="absolute inset-0 flex items-center justify-center"
+        animate={{
+          opacity: dark ? 1 : 0,
+          scale: dark ? 1 : 0.8,
+        }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+      >
         <svg
+          width="18"
+          height="18"
           viewBox="0 0 24 24"
-          className={clsx("w-4 h-4 m-1 absolute left-0 top-0 transition-opacity duration-300", dark ? "opacity-100" : "opacity-0")}
-          xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
+          className="text-text"
         >
-          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
         </svg>
-      </span>
+      </motion.div>
 
-  {/* decorative end icons removed — knob contains the single authoritative icon */}
-    </button>
+      {/* Subtle Hover Background */}
+      <motion.div
+        className="absolute inset-0 rounded-lg bg-text/5 opacity-0 group-hover:opacity-100"
+        transition={{ duration: 0.2 }}
+      />
+    </motion.button>
   );
 }
