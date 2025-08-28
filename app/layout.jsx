@@ -1,12 +1,15 @@
 import "./../styles/globals.css";
-import { Inter, DM_Serif_Display } from "next/font/google";
+import { Inter } from "next/font/google";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 
-// Body + UI text
-const inter = Inter({ subsets: ["latin"], display: "swap" });
-// Headings for stronger personality
-const dmSerif = DM_Serif_Display({ subsets: ["latin"], weight: ["400"], display: "swap" });
+// Professional FAANG-level font - used by Google, Apple, Microsoft, Meta
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-inter"
+});
 
 export const metadata = {
   title: "Syed Uzair • Portfolio",
@@ -32,7 +35,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased min-h-screen bg-background text-text`} style={{"--font-heading": dmSerif.style.fontFamily}}>
+      <body className={`${inter.className} antialiased min-h-screen bg-background text-text font-inter`}>
         <Nav />
         <main className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-8">{children}</main>
         <Footer />
