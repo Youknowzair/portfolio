@@ -8,7 +8,7 @@ const testimonials = [
     meta: "August 22, 2025, Naufil worked with Syed on the same team",
     quote: "I had the pleasure of working alongside Syed Uzair on our Capstone project in our diploma, where I realized his knack for system design and backend development. One particular thing I noticed in him was his creativity in ideas. Uzair is great at breaking down complex problems and designing solutions that are both practical and scalable. He always brings in a solid technical insight, communicates ideas very clearly, and is always ready to help the team whenever needed. His dedication, positive attitude, and natural problem-solving skills made working with him truly enjoyable. I’m confident Uzair will excel wherever his journey takes him.",
     linkedin: "https://www.linkedin.com/in/syed-uzair-a31308256/",
-    avatar: "https://avatars.githubusercontent.com/u/145439464?v=4",
+    avatar: "https://media.licdn.com/dms/image/v2/D4D03AQFUjIrElMKA0g/profile-displayphoto-crop_800_800/B4DZj3CWtCIYAI-/0/1756491248930?e=1761782400&v=beta&t=gw1dcBSS9pFrCkdGN7xUruS4VrqXJitExx87zNfkhkk",
   },
   {
     name: "Dr.Sangeeta Vhatkar",
