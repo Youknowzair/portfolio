@@ -6,6 +6,14 @@ export default {
     './app/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
+    screens: {
+      'xs': '475px',
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+    },
     extend: {
       fontFamily: {
         'inter': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif'],
@@ -23,7 +31,10 @@ export default {
         accent: { blue: "var(--accent-blue)", teal: "var(--accent-teal)" }
       },
       borderRadius: { xl2: "14px" },
-      boxShadow: { glass: "0 10px 30px rgba(0,0,0,0.06)" },
+      boxShadow: { 
+        glass: "0 10px 30px rgba(0,0,0,0.06)",
+        'mobile-card': "0 4px 20px rgba(0,0,0,0.08)"
+      },
       keyframes: {
         dash: { "0%": { "stroke-dashoffset": "120" }, "100%": { "stroke-dashoffset": "0" } }
       },

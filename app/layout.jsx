@@ -35,9 +35,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased min-h-screen bg-background text-text font-inter`}>
+      <body className={`${inter.className} antialiased min-h-screen bg-background text-text font-inter overflow-x-hidden`}>
         <Nav />
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-8">{children}</main>
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-6 sm:py-8">{children}</main>
         <Footer />
       </body>
     </html>
