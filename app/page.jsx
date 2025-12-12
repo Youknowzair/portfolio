@@ -99,7 +99,6 @@ export default function OnePage() {
               </li>
               <li className="flex items-center gap-2">
                 <div className="w-1.5 h-1.5 bg-text rounded-full"></div>
-                Georgia Tech MS CS (target)
               </li>
               <li className="flex items-center gap-2">
                 <div className="w-1.5 h-1.5 bg-text rounded-full"></div>
